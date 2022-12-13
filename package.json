@@ -16,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/RVCC-IDMX/discord-bot-dibend/issues"
   },
-  "homepage": "https://github.com/RVCC-IDMX/discord-bot-dibend#readme"
+  "homepage": "https://github.com/RVCC-IDMX/discord-bot-dibend#readme",
+  "devDependencies": {
+    "@eslint/create-config": "^0.4.1",
+    "eslint": "^8.29.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  }
 }
