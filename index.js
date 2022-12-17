@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const {
-  Client, Collection, Events, GatewayIntentBits,
+  Client, Collection, Events, GatewayIntentBits, EmbedBuilder,
 } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -36,6 +36,21 @@ client.on(Events.InteractionCreate, async (interaction) => {
     console.error(error);
     await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
   }
+});
+
+client.on(Events.InteractionCreate, (interaction) => {
+  if (!interaction.isButton()) return;
+  const embed = new EmbedBuilder()
+    .setColor(0x0099FF)
+    .setTitle('Blast Crypto Mining')
+    .setURL('https://blastmining.net')
+    .setAuthor({ name: 'David DiBenedetto', iconURL: 'https://www.njweb.solutions/nj.png', url: 'https://njweb.solutions' })
+    .setDescription('Blast Crypto Mining, Home Crypto Miner')
+    .setThumbnail('https://www.njweb.solutions/rigs/4.jpg')
+    .setTimestamp();
+
+  interaction.reply({ embeds: [embed] });
+  console.log(interaction);
 });
 
 client.login(token);
