@@ -13,13 +13,15 @@ module.exports = {
     const cow = `${interaction.options.getString('cow')}`;
     cowsay.list(() => { }).then((cowList) => {
       const validCow = cowList.includes(`${cow}.cow`);
-      console.log(validCow);
       if (validCow) {
-        console.log(JSON.stringify({ text: interaction.options.getString('input'), cow }));
-        const say = cowsay.say({ text: interaction.options.getString('input'), cow }).replaceAll('`', '\\`');
-        interaction.reply(`\`\`\`${say}\`\`\``);
+        const say = `\`\`\`${cowsay.say({ text: interaction.options.getString('input'), f: `${cow}` }).replaceAll('`', '\\`')}\`\`\``;
+        if (say.length <= 2000) {
+          interaction.reply(say);
+        } else {
+          interaction.reply('Reply would be too long. Please try a different cow or shorter message.');
+        }
       } else {
-        interaction.reply('invalid cow. See a list of valid cows at https://github.com/piuccio/cowsay/tree/master/cows');
+        interaction.reply('invalid cow. See a list of valid cows at https://github.com/piuccio/cowsay/tree/master/cows (don\'t include .cow in the cow name).');
       }
     });
   },

@@ -50,7 +50,6 @@ client.on(Events.InteractionCreate, (interaction) => {
     .setTimestamp();
 
   interaction.reply({ embeds: [embed] });
-  console.log(interaction);
 });
 
 client.login(token);
