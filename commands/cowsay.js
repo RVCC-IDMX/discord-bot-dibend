@@ -1,0 +1,13 @@
+const cowsay = require('cowsay');
+const { SlashCommandBuilder } = require('discord.js');
+
+const say = cowsay.say({ text: 'Moo!' }).replace('`', '\\`');
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName('cowsay')
+    .setDescription('Draws a cow with a message!'),
+  async execute(interaction) {
+    await interaction.reply(`\`\`\`${say}\`\`\``);
+  },
+};
