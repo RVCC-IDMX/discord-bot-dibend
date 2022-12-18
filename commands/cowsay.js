@@ -1,7 +1,7 @@
 const cowsay = require('cowsay');
 const { SlashCommandBuilder } = require('discord.js');
 
-const say = cowsay.say({ text: 'Moo!' }).replace('`', '\\`');
+const say = cowsay.say({ text: 'Moo!' }).replaceAll('`', '\\`');
 
 module.exports = {
   data: new SlashCommandBuilder()
