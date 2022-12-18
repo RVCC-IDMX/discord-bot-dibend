@@ -1,13 +1,26 @@
 const cowsay = require('cowsay');
 const { SlashCommandBuilder } = require('discord.js');
 
-const say = cowsay.say({ text: 'Moo!' }).replaceAll('`', '\\`');
-
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('cowsay')
-    .setDescription('Draws a cow with a message!'),
+    .setDescription('Draws a cow with a message!')
+    .addStringOption((option) => option.setName('input')
+      .setDescription('The message for the cow to say').setMaxLength(25))
+    .addStringOption((option) => option.setName('cow')
+      .setDescription('The type of cow').setMaxLength(25)),
   async execute(interaction) {
-    await interaction.reply(`\`\`\`${say}\`\`\``);
+    const cow = `${interaction.options.getString('cow')}`;
+    cowsay.list(() => { }).then((cowList) => {
+      const validCow = cowList.includes(`${cow}.cow`);
+      console.log(validCow);
+      if (validCow) {
+        console.log(JSON.stringify({ text: interaction.options.getString('input'), cow }));
+        const say = cowsay.say({ text: interaction.options.getString('input'), cow }).replaceAll('`', '\\`');
+        interaction.reply(`\`\`\`${say}\`\`\``);
+      } else {
+        interaction.reply('invalid cow. See a list of valid cows at https://github.com/piuccio/cowsay/tree/master/cows');
+      }
+    });
   },
 };
